@@ -2,6 +2,9 @@ package com.example.wikeapiapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.wikeapiapp.repository.Repo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FetchListViewModel @Inject constructor(): ViewModel() {
@@ -10,7 +13,10 @@ class FetchListViewModel @Inject constructor(): ViewModel() {
     lateinit var repo: Repo
 
     fun fetchList(){
-        repo.fetchList()
+        CoroutineScope(Dispatchers.IO).launch {
+            repo.fetchList()
+        }
+
     }
 
 }
